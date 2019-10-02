@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyTrans</string>
+    <string name="tS">번역할언어</string>
+    <string name="tbS">번역될언어</string>
+    <string name="BtnOn">ON</string>
+    <string name="BtnOff">OFF</string>
 </resources>

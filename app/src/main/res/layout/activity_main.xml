@@ -11,12 +11,65 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
+        app:layout_constraintGuide_begin="208dp" />
 
     <Spinner
         android:id="@+id/tTSpin"
-        android:layout_width="194dp"
-        android:layout_height="40dp"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="27dp" />
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="74dp"
+        app:layout_constraintEnd_toStartOf="@+id/tbsText"
+        app:layout_constraintStart_toEndOf="@+id/tsText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/tbTSpin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="7dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tTSpin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tbsText"
+        app:layout_constraintTop_toTopOf="@+id/tTSpin" />
+
+    <TextView
+        android:id="@+id/tsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="17dp"
+        android:text="@string/tS"
+        app:layout_constraintEnd_toStartOf="@+id/tTSpin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tTSpin" />
+
+    <TextView
+        android:id="@+id/tbsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="21dp"
+        android:text="@string/tbS"
+        app:layout_constraintEnd_toStartOf="@+id/tbTSpin"
+        app:layout_constraintStart_toEndOf="@+id/tTSpin"
+        app:layout_constraintTop_toTopOf="@+id/tTSpin" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="@string/BtnOn"
+        android:textOff="@string/BtnOff"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="74dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
