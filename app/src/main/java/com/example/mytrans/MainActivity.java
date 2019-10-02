@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,13 +32,33 @@ public class MainActivity extends AppCompatActivity {
 
         tT=(Spinner)findViewById(R.id.tTSpin);
         tT.setAdapter(arrayAdapter);
+        tbT=(Spinner)findViewById(R.id.tbTSpin);
+        tbT.setAdapter(arrayAdapter);
+
         tT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l){
+                Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",
+                        Toast.LENGTH_SHORT).show();
 
             }
-        });
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
 
+        });
+        tbT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l){
+                Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+
+        });
 
 
     }

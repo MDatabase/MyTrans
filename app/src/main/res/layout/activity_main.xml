@@ -15,8 +15,18 @@
 
     <Spinner
         android:id="@+id/tTSpin"
+        android:background="@drawable/spinner_background"
         android:layout_width="194dp"
         android:layout_height="40dp"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="27dp" />
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="29dp" />
+
+    <Spinner
+        android:id="@+id/tbTSpin"
+        android:layout_width="194dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintStart_toEndOf="@+id/tTSpin"
+        tools:layout_editor_absoluteY="29dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
