@@ -1,5 +1,6 @@
 package com.example.mytrans;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int DRAW_OVER_OTHER_APP_PERMISSION = 123;
     private Spinner tT,tbT;
+
+
     ArrayList<String> langList;
     ArrayAdapter<String> arrayAdapter;
     Button OnOffBtn;
@@ -45,17 +50,57 @@ public class MainActivity extends AppCompatActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.ppgAPImenu:
+                show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    // dialog 출력 함수
+    void show()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_login, null);
+        builder.setView(view);
+
+        final Button submit = (Button) view.findViewById(R.id.buttonSubmit);
+        final EditText email = (EditText) view.findViewById(R.id.edittextEmailAddress);
+        final EditText password = (EditText) view.findViewById(R.id.edittextPassword);
+
+        final AlertDialog dialog = builder.create();
+        submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String strEmail = email.getText().toString();
+                String strPassword = password.getText().toString();
+
+                if(strEmail.equalsIgnoreCase("8keADaQNnO_KrX0nrk62")&&strPassword.equals("AbCdEfG")){
+                    Toast.makeText(getApplicationContext(), strEmail+"올바른 API 값입니다.",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), strEmail+"/"+strPassword,Toast.LENGTH_LONG).show();
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), strEmail+"올바른 API가 아닙니다.",Toast.LENGTH_LONG).show();
+                }
+
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         askForSystemOverlayPermission(); // 퍼미션을 묻는 함수
+        // 버튼으로 임시
+
+
 
         ftoggle=findViewById(R.id.toggleButton);
         fBtn=findViewById(R.id.fbutton);
