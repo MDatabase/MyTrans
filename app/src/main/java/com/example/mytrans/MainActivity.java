@@ -13,9 +13,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     Button OnOffBtn;
     Button fBtn;
     TextView fTxt;
+    ToggleButton ftoggle;
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         askForSystemOverlayPermission(); // 퍼미션을 묻는 함수
 
+        ftoggle=findViewById(R.id.toggleButton);
         fBtn=findViewById(R.id.fbutton);
         //fTxt=findViewById(R.id.ftextView);
         int badge_count = getIntent().getIntExtra("badge_count", 0);
@@ -103,7 +110,17 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        ftoggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked == true){
+                    Toast.makeText(MainActivity.this, "플로팅버튼-ON", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "플로팅버튼-OFF", Toast.LENGTH_SHORT).show();
+                }
 
+            }
+        });
 
 
 
