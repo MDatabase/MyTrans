@@ -6,90 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="208dp" />
-
     <Spinner
         android:id="@+id/tTSpin"
-        android:layout_width="0dp"
+        android:layout_width="110dp"
         android:layout_height="43dp"
-        android:layout_marginTop="74dp"
-        app:layout_constraintEnd_toStartOf="@+id/tbsText"
-        app:layout_constraintStart_toEndOf="@+id/tsText"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="88dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.487" />
 
     <Spinner
         android:id="@+id/tbTSpin"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="7dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tTSpin"
+        android:layout_width="110dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="88dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tbsText"
-        app:layout_constraintTop_toTopOf="@+id/tTSpin" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.486" />
 
     <TextView
         android:id="@+id/tsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginStart="116dp"
         android:text="@string/tS"
-        app:layout_constraintEnd_toStartOf="@+id/tTSpin"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tTSpin" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.507" />
 
     <TextView
         android:id="@+id/tbsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginStart="116dp"
         android:text="@string/tbS"
-        app:layout_constraintEnd_toStartOf="@+id/tbTSpin"
-        app:layout_constraintStart_toEndOf="@+id/tTSpin"
-        app:layout_constraintTop_toTopOf="@+id/tTSpin" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.459" />
+
 
     <Button
         android:id="@+id/fbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
         android:text="ADD FLOATING BUTTON"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-    <TextView
-        android:id="@+id/ftextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="164dp"
-        android:layout_marginBottom="85dp"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toTopOf="@+id/fbutton"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tTSpin" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textOn="@string/BtnOn"
         android:textOff="@string/BtnOff"
+        android:textOn="@string/BtnOn"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -97,5 +77,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="74dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="156dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="236dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

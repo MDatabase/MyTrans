@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,16 +29,33 @@ public class MainActivity extends AppCompatActivity {
     Button fBtn;
     TextView fTxt;
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.ppgAPImenu:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         askForSystemOverlayPermission(); // 퍼미션을 묻는 함수
 
         fBtn=findViewById(R.id.fbutton);
-        fTxt=findViewById(R.id.ftextView);
+        //fTxt=findViewById(R.id.ftextView);
         int badge_count = getIntent().getIntExtra("badge_count", 0);
 
-        fTxt.setText(badge_count + " messages received previously");
+        //fTxt.setText(badge_count + " messages received previously");
 
 
         fBtn.setOnClickListener(new View.OnClickListener() {
