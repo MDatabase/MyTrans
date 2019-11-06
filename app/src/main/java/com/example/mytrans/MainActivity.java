@@ -29,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     Button OnOffBtn;
     Button fBtn;
-    TextView fTxt;
+    TextView fTxt,rTT;
     ToggleButton ftoggle;
+    MenuItem mainmenuitem;
 
 
 
@@ -43,8 +44,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
+        rTT=findViewById(R.id.reportTT);
         switch (item.getItemId()) {
             case R.id.ppgAPImenu:
+                //Toast.makeText(this, "메뉴 이벤트가 처리되었다.",Toast.LENGTH_SHORT).show();
+                rTT.setText("메뉴 이벤트가 처리되었다.");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -57,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         askForSystemOverlayPermission(); // 퍼미션을 묻는 함수
 
-        ftoggle=findViewById(R.id.toggleButton);
+        mainmenuitem=findViewById(R.id.ppgAPImenu);
+        ftoggle=findViewById(R.id.fTB);
         fBtn=findViewById(R.id.fbutton);
+        rTT=findViewById(R.id.reportTT);
         //fTxt=findViewById(R.id.ftextView);
         int badge_count = getIntent().getIntExtra("badge_count", 0);
 
@@ -73,6 +79,26 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     errorToast();
                 }
+            }
+        });
+        ftoggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Intent fIT=new Intent(MainActivity.this, FloatingWidgetService.class);
+                if (isChecked == true){
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(MainActivity.this)) {
+                        startService(fIT);
+                    } else {
+                        errorToast();
+                    }
+                    //Toast.makeText(MainActivity.this, "플로팅버튼-ON", Toast.LENGTH_SHORT).show();
+                   // rTT.setText("토글버튼 이벤트가 처리되었다.");
+                } else {
+                    stopService(fIT);
+                    //Toast.makeText(MainActivity.this, "플로팅버튼-OFF", Toast.LENGTH_SHORT).show();
+                    //rTT.setText("토글버튼off 이벤트가 처리되었다.");
+                }
+
             }
         });
 
@@ -91,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
         tT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l){
-                Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",Toast.LENGTH_SHORT).show();
+                rTT.setText("스피너 이벤트가 처리되었다.");
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -103,24 +129,14 @@ public class MainActivity extends AppCompatActivity {
         tbT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l){
-                Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",Toast.LENGTH_SHORT).show();
+                rTT.setText("스피너 이벤트가 처리되었다.");
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        ftoggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked == true){
-                    Toast.makeText(MainActivity.this, "플로팅버튼-ON", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(MainActivity.this, "플로팅버튼-OFF", Toast.LENGTH_SHORT).show();
-                }
 
-            }
-        });
 
 
 

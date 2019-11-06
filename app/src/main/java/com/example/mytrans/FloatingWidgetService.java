@@ -138,58 +138,38 @@ public class FloatingWidgetService extends Service {
                             int middle = mWidth / 2;
                             float nearestXWall = params.x >= middle ? mWidth : 0;
                             params.x = (int) nearestXWall;
-
-
                             mWindowManager.updateViewLayout(mOverlayView, params);
-
 
                             return true;
                         case MotionEvent.ACTION_MOVE:
-
-
                             int xDiff = Math.round(event.getRawX() - initialTouchX);
                             int yDiff = Math.round(event.getRawY() - initialTouchY);
-
-
                             //Calculate the X and Y coordinates of the view.
                             params.x = initialX + xDiff;
                             params.y = initialY + yDiff;
 
                             //Update the layout with new X & Y coordinates
                             mWindowManager.updateViewLayout(mOverlayView, params);
-
-
                             return true;
                     }
                     return false;
                 }
             });
         } else {
-
             counterFab.increase();
-
         }
-
-
         return super.onStartCommand(intent, flags, startId);
-
-
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-
         setTheme(R.style.AppTheme);
-
-
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mOverlayView != null)
             mWindowManager.removeView(mOverlayView);
     }
-
 }

@@ -61,7 +61,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <ToggleButton
-        android:id="@+id/toggleButton"
+        android:id="@+id/fTB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textOff="@string/BtnOff"
@@ -91,5 +91,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="236dp" />
+
+    <TextView
+        android:id="@+id/reportTT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="이벤트 처리결과"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
