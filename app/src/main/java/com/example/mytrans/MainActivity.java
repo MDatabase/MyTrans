@@ -18,10 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.app.Activity;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private static final int DRAW_OVER_OTHER_APP_PERMISSION = 123;
     private Spinner tT,tbT;
@@ -74,11 +75,9 @@ public class MainActivity extends AppCompatActivity {
         fBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(MainActivity.this)) {
-                    startService(new Intent(MainActivity.this, FloatingWidgetService.class));
-                } else {
-                    errorToast();
-                }
+                Intent svc = new Intent(MainActivity.this,FloatingWidgetService.class);
+                startService(svc);
+                finish();
             }
         });
         ftoggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     //Toast.makeText(MainActivity.this, "플로팅버튼-ON", Toast.LENGTH_SHORT).show();
                    // rTT.setText("토글버튼 이벤트가 처리되었다.");
                 } else {
-                    stopService(fIT);
+                    //stopService(fIT);
                     //Toast.makeText(MainActivity.this, "플로팅버튼-OFF", Toast.LENGTH_SHORT).show();
                     //rTT.setText("토글버튼off 이벤트가 처리되었다.");
                 }
