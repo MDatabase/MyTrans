@@ -85,15 +85,9 @@ public class MainActivity extends AppCompatActivity{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Intent fIT=new Intent(MainActivity.this, FloatingWidgetService.class);
                 if (isChecked == true){
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(MainActivity.this)) {
                         startService(fIT);
-                    } else {
-                        errorToast();
-                    }
-                    //Toast.makeText(MainActivity.this, "플로팅버튼-ON", Toast.LENGTH_SHORT).show();
-                   // rTT.setText("토글버튼 이벤트가 처리되었다.");
                 } else {
-                    //stopService(fIT);
+                    stopService(fIT);
                     //Toast.makeText(MainActivity.this, "플로팅버튼-OFF", Toast.LENGTH_SHORT).show();
                     //rTT.setText("토글버튼off 이벤트가 처리되었다.");
                 }
