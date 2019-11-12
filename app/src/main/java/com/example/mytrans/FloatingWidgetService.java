@@ -127,6 +127,8 @@ public class FloatingWidgetService extends Service implements OnTouchListener, O
     @Override
     public void onClick(View v) {
         Toast.makeText(this, "Overlay button click event", Toast.LENGTH_SHORT).show();
+        Intent it=new Intent(FloatingWidgetService.this,SelectingArea.class);
+        startActivity(it);
     }
 
 }

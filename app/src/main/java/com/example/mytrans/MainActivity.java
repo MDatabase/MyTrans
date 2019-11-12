@@ -10,6 +10,8 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +22,11 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.app.Activity;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
+
 import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity{
 
@@ -28,13 +34,14 @@ public class MainActivity extends AppCompatActivity{
     private Spinner tT,tbT;
     ArrayList<String> langList;
     ArrayAdapter<String> arrayAdapter;
-    Button OnOffBtn;
+    Button OnOffBtn,imageBtn,rotationBtn,Mstart,Mend;
     Button fBtn;
     TextView fTxt,rTT;
     ToggleButton ftoggle;
     MenuItem mainmenuitem;
+    SubsamplingScaleImageView sampleimage;
 
-
+    private int nBefore = 0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,11 +73,46 @@ public class MainActivity extends AppCompatActivity{
         ftoggle=findViewById(R.id.fTB);
         fBtn=findViewById(R.id.fbutton);
         rTT=findViewById(R.id.reportTT);
-        //fTxt=findViewById(R.id.ftextView);
-        int badge_count = getIntent().getIntExtra("badge_count", 0);
 
-        //fTxt.setText(badge_count + " messages received previously");
+        imageBtn=findViewById(R.id.iBtn); // 이미지 출력 버튼
+        sampleimage=findViewById(R.id.sampleimage); // 이미지뷰
+        sampleimage.setImage(ImageSource.resource(R.drawable.sample));
 
+        rotationBtn=findViewById(R.id.rotationImgBtn);
+
+        Mstart = findViewById(R.id.musicStartButton); // 음악 시작 버튼
+        Mend = findViewById(R.id.musicEndButton); // 음악 종료 버튼
+        Button.OnClickListener onClickListener=new Button.OnClickListener(){
+            @Override
+            public void onClick(View src){
+                switch(src.getId()){
+                    case R.id.musicStartButton:
+                        startService(new Intent(MainActivity.this,MusicService.class));
+                        break;
+                    case R.id.musicEndButton:
+                        stopService(new Intent(MainActivity.this,MusicService.class));
+                        break;
+                }
+            }
+        };
+        Mstart.setOnClickListener(onClickListener);
+        Mend.setOnClickListener(onClickListener);
+
+
+        imageBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                sampleimage.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //이미지 회전 버튼
+        rotationBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                testRotation(nBefore - 10);
+            }
+        });
 
         fBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +136,7 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+
 
 
         langList=new ArrayList<>();
@@ -129,11 +172,16 @@ public class MainActivity extends AppCompatActivity{
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
-
-
-
     }
+    public void testRotation(int i) {
+        RotateAnimation ra = new RotateAnimation(nBefore, i, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        ra.setDuration(250);
+        ra.setFillAfter(true);
+        sampleimage.startAnimation(ra);
+        nBefore = i;
+    }
+
+
     private void askForSystemOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
 
@@ -144,6 +192,7 @@ public class MainActivity extends AppCompatActivity{
             startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION);
         }
     }
+
     protected void onPause() {
         super.onPause();
 

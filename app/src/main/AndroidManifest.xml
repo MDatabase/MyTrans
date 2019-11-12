@@ -28,7 +28,10 @@
             android:name=".FloatingWidgetService"
             android:enabled="true"
             android:exported="false" />
-
+        <activity android:name=".SelectingArea"/>
+        <activity android:name=".TransOutput"/>
+        <service android:name=".MusicService"
+            android:enabled="true"/>
     </application>
 
 </manifest>

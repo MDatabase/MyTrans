@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/temp_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="캡쳐한 사진에서 영역을 지정하는 액티비티 " />
+
+    <Button
+        android:id="@+id/tempBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="다음 액티비티로"
+        android:clickable="true"
+        android:onClick="nextActivity"/>
+</LinearLayout>
