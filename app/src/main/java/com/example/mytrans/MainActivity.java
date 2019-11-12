@@ -1,6 +1,5 @@
 package com.example.mytrans;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,28 +14,30 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.app.Activity;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+
+
 
     private static final int DRAW_OVER_OTHER_APP_PERMISSION = 123;
     private Spinner tT,tbT;
-
-
     ArrayList<String> langList;
     ArrayAdapter<String> arrayAdapter;
     Button OnOffBtn;
     Button fBtn;
-    TextView fTxt;
+    TextView fTxt,rTT;
     ToggleButton ftoggle;
+    MenuItem mainmenuitem;
 
-
+    Button start,end;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,62 +48,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
+        rTT=findViewById(R.id.reportTT);
         switch (item.getItemId()) {
             case R.id.ppgAPImenu:
-                show();
+                //Toast.makeText(this, "메뉴 이벤트가 처리되었다.",Toast.LENGTH_SHORT).show();
+                rTT.setText("메뉴 이벤트가 처리되었다.");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    // dialog 출력 함수
-    void show()
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_login, null);
-        builder.setView(view);
-
-        final Button submit = (Button) view.findViewById(R.id.buttonSubmit);
-        final EditText email = (EditText) view.findViewById(R.id.edittextEmailAddress);
-        final EditText password = (EditText) view.findViewById(R.id.edittextPassword);
-
-        final AlertDialog dialog = builder.create();
-        submit.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String strEmail = email.getText().toString();
-                String strPassword = password.getText().toString();
-
-                if(strEmail.equalsIgnoreCase("8keADaQNnO_KrX0nrk62")&&strPassword.equals("AbCdEfG")){
-                    Toast.makeText(getApplicationContext(), strEmail+"올바른 API 값입니다.",Toast.LENGTH_LONG).show();
-                    //Toast.makeText(getApplicationContext(), strEmail+"/"+strPassword,Toast.LENGTH_LONG).show();
-
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), strEmail+"올바른 API가 아닙니다.",Toast.LENGTH_LONG).show();
-                }
-
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         askForSystemOverlayPermission(); // 퍼미션을 묻는 함수
-        // 버튼으로 임시
 
 
+        start = (Button) findViewById(R.id.button);
+        end = (Button)findViewById(R.id.button2);
 
-        ftoggle=findViewById(R.id.toggleButton);
+        start.setOnClickListener(this);
+        end.setOnClickListener(this);
+
+
+        mainmenuitem=findViewById(R.id.ppgAPImenu);
+        ftoggle=findViewById(R.id.fTB);
         fBtn=findViewById(R.id.fbutton);
+        rTT=findViewById(R.id.reportTT);
         //fTxt=findViewById(R.id.ftextView);
         int badge_count = getIntent().getIntExtra("badge_count", 0);
 
@@ -113,11 +86,23 @@ public class MainActivity extends AppCompatActivity {
         fBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(MainActivity.this)) {
-                    startService(new Intent(MainActivity.this, FloatingWidgetService.class));
+                Intent svc = new Intent(MainActivity.this,FloatingWidgetService.class);
+                startService(svc);
+                finish();
+            }
+        });
+        ftoggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Intent fIT=new Intent(MainActivity.this, FloatingWidgetService.class);
+                if (isChecked == true){
+                    startService(fIT);
                 } else {
-                    errorToast();
+                    stopService(fIT);
+                    //Toast.makeText(MainActivity.this, "플로팅버튼-OFF", Toast.LENGTH_SHORT).show();
+                    //rTT.setText("토글버튼off 이벤트가 처리되었다.");
                 }
+
             }
         });
 
@@ -136,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
         tT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l){
-                Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",Toast.LENGTH_SHORT).show();
+                rTT.setText("스피너 이벤트가 처리되었다.");
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -148,28 +133,33 @@ public class MainActivity extends AppCompatActivity {
         tbT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l){
-                Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),langList.get(i)+"가 선택되었습니다.",Toast.LENGTH_SHORT).show();
+                rTT.setText("스피너 이벤트가 처리되었다.");
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        ftoggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked == true){
-                    Toast.makeText(MainActivity.this, "플로팅버튼-ON", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(MainActivity.this, "플로팅버튼-OFF", Toast.LENGTH_SHORT).show();
-                }
 
-            }
-        });
 
 
 
     }
+
+    public void onClick(View src){
+        switch(src.getId()){
+            case R.id.button:
+                startService(new Intent(this,MusicService.class));
+                break;
+            case R.id.button2:
+                stopService(new Intent(this,MusicService.class));
+                break;
+        }
+    }
+
+
+
+
     private void askForSystemOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
 
@@ -192,11 +182,10 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }else {
-        //super.onActivityResult(requestCode, resultCode, data);
+            //super.onActivityResult(requestCode, resultCode, data);
         }
     }
     private void errorToast() {
         Toast.makeText(this, "Draw over other app permission not available. Can't start the application without the permission.", Toast.LENGTH_LONG).show();
     }
 }
-

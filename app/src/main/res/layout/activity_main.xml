@@ -61,7 +61,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <ToggleButton
-        android:id="@+id/toggleButton"
+        android:id="@+id/fTB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textOff="@string/BtnOff"
@@ -92,5 +92,37 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="236dp" />
 
+    <TextView
+        android:id="@+id/reportTT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="이벤트 처리결과"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="40dp"
+        android:text="배경음악시작"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="40dp"
+        android:text="배경음악종료"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

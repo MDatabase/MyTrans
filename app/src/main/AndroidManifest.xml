@@ -5,6 +5,7 @@
     <dist:module dist:instant="true" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="TASKS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 
     <application
@@ -27,6 +28,8 @@
             android:name=".FloatingWidgetService"
             android:enabled="true"
             android:exported="false" />
+        <service android:name=".MusicService"
+            android:enabled="true"/>
 
     </application>
 
