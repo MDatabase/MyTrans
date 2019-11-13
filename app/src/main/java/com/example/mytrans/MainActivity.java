@@ -143,7 +143,6 @@ public class MainActivity extends AppCompatActivity{
         langList.add("한국어");
         langList.add("영어");
         langList.add("일본어");
-        langList.add("중국어");
 
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item,langList);

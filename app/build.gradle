@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.rmtheis:tess-two:9.1.0'
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
